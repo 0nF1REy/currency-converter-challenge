@@ -8,6 +8,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -18,12 +20,12 @@ public class Main {
         @SerializedName("base_code")
         String baseCode;
         @SerializedName("conversion_rates")
-        java.util.Map<String, Double> conversionRates;
+        Map<String, Double> conversionRates;
     }
 
     public static void main(String[] args) {
 
-        String apiKey = "27e0e0261fabe51366495de9"; // sua API key
+        String apiKey = "27e0e0261fabe51366495de9";
         String baseCurrency = "USD";
 
         String url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + baseCurrency;
@@ -41,9 +43,20 @@ public class Main {
             ExchangeRateResponse exchangeRateResponse = gson.fromJson(jsonResponse, ExchangeRateResponse.class);
 
             System.out.println("Base Currency: " + exchangeRateResponse.baseCode);
-            System.out.println("Conversion Rates:");
-            exchangeRateResponse.conversionRates.forEach((currency, rate) ->
-                    System.out.println(currency + " -> " + rate));
+            System.out.println("Filtered Conversion Rates:");
+
+            // Lista das moedas que queremos filtrar
+            List<String> selectedCurrencies = List.of("ARS", "BOB", "BRL", "CLP", "COP", "USD");
+
+            // Filtra e exibe apenas as moedas selecionadas
+            selectedCurrencies.forEach(currency -> {
+                Double rate = exchangeRateResponse.conversionRates.get(currency);
+                if (rate != null) {
+                    System.out.println(currency + " -> " + rate);
+                } else {
+                    System.out.println(currency + " -> (not available)");
+                }
+            });
 
         } catch (IOException | InterruptedException e) {
             System.out.println("Erro ao obter dados da API: " + e.getMessage());
