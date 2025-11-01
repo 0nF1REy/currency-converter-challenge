@@ -14,6 +14,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+
         final String apiKey = "27e0e0261fabe51366495de9";
         final String baseCurrency = "USD";
 
@@ -32,7 +33,7 @@ public class Main {
                 Util.print("Taxas disponíveis:");
                 selectedCurrencies.forEach(currency -> {
                     Double rate = exchangeRateResponse.conversionRates().get(currency);
-                    if (rate != null) System.out.printf("%s -> %.4f%n", currency, rate);
+                    if (rate != null) Util.printf("%s -> %.4f%n", currency, rate);
                 });
 
                 Util.print("""
@@ -86,7 +87,7 @@ public class Main {
                 if (!fromCurrency.isEmpty() && !toCurrency.isEmpty()) {
                     double result = converterService.convert(fromCurrency, toCurrency, amount);
                     if (result >= 0) {
-                        System.out.printf("\n%.2f %s = %.2f %s%n", amount, fromCurrency, result, toCurrency);
+                        Util.printf("\n%.2f %s = %.2f %s%n", amount, fromCurrency, result, toCurrency);
                         String timestamp = LocalDateTime.now()
                                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                         history.addRecord("[%s] %.2f %s -> %.2f %s".formatted(timestamp, amount, fromCurrency, result, toCurrency));
