@@ -1,0 +1,76 @@
+# Diretórios e arquivos gerados automaticamente pelo NetBeans
+nbproject/private/
+build/
+dist/
+
+# Arquivos específicos do NetBeans que não precisam ser versionados
+nbproject/genfiles.properties
+nbproject/build-impl.xml
+
+# Arquivos de metadados do sistema
+*.swp
+*.swo
+
+# Arquivos compilados
+*.class
+
+# Arquivo de manifesto gerado
+manifest.mf
+
+# Arquivos compilados Java
+*.class
+
+# Arquivos empacotados (WAR, EAR, JAR)
+*.war
+*.ear
+*.jar
+!lib/*.jar
+
+# Diretórios de build
+/build/
+/target/
+out/
+**/out/
+/bin/
+
+# Arquivos de configuração da IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# Dependências do Maven
+/.m2/
+
+# Dependências do Gradle
+/.gradle/
+/build/
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários
+*.tmp
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos do NetBeans
+/nbproject/
+/dist/
+
+# Arquivos gerados por testes
+/test-output/
+/reports/
+
+# Arquivo de variáveis de ambiente
+.env
