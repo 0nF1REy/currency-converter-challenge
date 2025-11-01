@@ -61,81 +61,56 @@ public class Main {
 
                 System.out.println("\nEscolha uma opção:");
                 System.out.println("1 - Converter moedas manualmente");
-                System.out.println("2 - Conversão rápida: USD -> BRL");
-                System.out.println("3 - Conversão rápida: BRL -> USD");
-                System.out.println("4 - Conversão rápida: EUR -> USD");
-                System.out.println("5 - Conversão rápida: USD -> EUR");
-                System.out.println("6 - Conversão rápida: GBP -> USD");
-                System.out.println("7 - Conversão rápida: USD -> GBP");
-                System.out.println("8 - Ver histórico de conversões");
+
+                int menuIndex = 2;
+                Map<Integer, String[]> quickConversions = new HashMap<>();
+                for (String from : selectedCurrencies) {
+                    for (String to : selectedCurrencies) {
+                        if (!from.equals(to)) {
+                            quickConversions.put(menuIndex, new String[]{from, to});
+                            System.out.printf("%d - Conversão rápida: %s -> %s%n", menuIndex, from, to);
+                            menuIndex++;
+                        }
+                    }
+                }
+
+                System.out.println(menuIndex + " - Ver histórico de conversões");
                 System.out.println("0 - Sair");
                 System.out.print("Opção: ");
                 option = scanner.nextInt();
-                scanner.nextLine(); // limpar buffer
+                scanner.nextLine();
 
                 String fromCurrency = "";
                 String toCurrency = "";
                 double amount = 0;
 
-                switch (option) {
-                    case 1:
-                        System.out.print("Digite a moeda de origem (ex: USD): ");
-                        fromCurrency = scanner.nextLine().toUpperCase();
-                        System.out.print("Digite a moeda de destino (ex: BRL): ");
-                        toCurrency = scanner.nextLine().toUpperCase();
-                        System.out.print("Digite o valor a converter: ");
-                        amount = scanner.nextDouble();
-                        scanner.nextLine();
-                        break;
-                    case 2:
-                        fromCurrency = "USD"; toCurrency = "BRL";
-                        System.out.print("Digite o valor a converter: ");
-                        amount = scanner.nextDouble();
-                        scanner.nextLine();
-                        break;
-                    case 3:
-                        fromCurrency = "BRL"; toCurrency = "USD";
-                        System.out.print("Digite o valor a converter: ");
-                        amount = scanner.nextDouble();
-                        scanner.nextLine();
-                        break;
-                    case 4:
-                        fromCurrency = "EUR"; toCurrency = "USD";
-                        System.out.print("Digite o valor a converter: ");
-                        amount = scanner.nextDouble();
-                        scanner.nextLine();
-                        break;
-                    case 5:
-                        fromCurrency = "USD"; toCurrency = "EUR";
-                        System.out.print("Digite o valor a converter: ");
-                        amount = scanner.nextDouble();
-                        scanner.nextLine();
-                        break;
-                    case 6:
-                        fromCurrency = "GBP"; toCurrency = "USD";
-                        System.out.print("Digite o valor a converter: ");
-                        amount = scanner.nextDouble();
-                        scanner.nextLine();
-                        break;
-                    case 7:
-                        fromCurrency = "USD"; toCurrency = "GBP";
-                        System.out.print("Digite o valor a converter: ");
-                        amount = scanner.nextDouble();
-                        scanner.nextLine();
-                        break;
-                    case 8:
-                        System.out.println("\n=== Histórico de Conversões ===");
-                        if (conversionHistory.isEmpty()) {
-                            System.out.println("Nenhuma conversão realizada ainda.");
-                        } else {
-                            conversionHistory.forEach(System.out::println);
-                        }
-                        continue;
-                    case 0:
-                        continue;
-                    default:
-                        System.out.println("Opção inválida!");
-                        continue;
+                if (option == 0) {
+                    continue;
+                } else if (option == 1) {
+                    System.out.print("Digite a moeda de origem (ex: USD): ");
+                    fromCurrency = scanner.nextLine().toUpperCase();
+                    System.out.print("Digite a moeda de destino (ex: BRL): ");
+                    toCurrency = scanner.nextLine().toUpperCase();
+                    System.out.print("Digite o valor a converter: ");
+                    amount = scanner.nextDouble();
+                    scanner.nextLine();
+                } else if (option == menuIndex) {
+                    System.out.println("\n=== Histórico de Conversões ===");
+                    if (conversionHistory.isEmpty()) {
+                        System.out.println("Nenhuma conversão realizada ainda.");
+                    } else {
+                        conversionHistory.forEach(System.out::println);
+                    }
+                    continue;
+                } else if (quickConversions.containsKey(option)) {
+                    fromCurrency = quickConversions.get(option)[0];
+                    toCurrency = quickConversions.get(option)[1];
+                    System.out.printf("Digite o valor a converter de %s para %s: ", fromCurrency, toCurrency);
+                    amount = scanner.nextDouble();
+                    scanner.nextLine();
+                } else {
+                    System.out.println("Opção inválida!");
+                    continue;
                 }
 
                 if (!fromCurrency.isEmpty() && !toCurrency.isEmpty()) {
