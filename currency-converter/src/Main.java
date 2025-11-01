@@ -1,5 +1,3 @@
-package com.alanryan.currencyconverter;
-
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -41,37 +39,53 @@ public class Main {
             Gson gson = new Gson();
             ExchangeRateResponse exchangeRateResponse = gson.fromJson(jsonResponse, ExchangeRateResponse.class);
 
-            System.out.println("=== Conversor de Moedas ===");
-            System.out.println("Base Currency: " + exchangeRateResponse.baseCode);
-            System.out.println("\nTaxas filtradas disponíveis:");
-
             List<String> selectedCurrencies = List.of("ARS", "BOB", "BRL", "CLP", "COP", "USD");
-            selectedCurrencies.forEach(currency -> {
-                Double rate = exchangeRateResponse.conversionRates.get(currency);
-                if (rate != null) {
-                    System.out.printf("%s -> %.4f%n", currency, rate);
-                }
-            });
 
             Scanner scanner = new Scanner(System.in);
-            System.out.print("\nDigite a moeda de origem (ex: USD): ");
-            String fromCurrency = scanner.nextLine().toUpperCase();
+            int option;
 
-            System.out.print("Digite a moeda de destino (ex: BRL): ");
-            String toCurrency = scanner.nextLine().toUpperCase();
+            do {
+                System.out.println("\n=== Conversor de Moedas ===");
+                System.out.println("Base Currency: " + exchangeRateResponse.baseCode);
+                System.out.println("Taxas filtradas disponíveis:");
+                for (String currency : selectedCurrencies) {
+                    Double rate = exchangeRateResponse.conversionRates.get(currency);
+                    if (rate != null) {
+                        System.out.printf("%s -> %.4f%n", currency, rate);
+                    }
+                }
 
-            System.out.print("Digite o valor a converter: ");
-            double amount = scanner.nextDouble();
+                System.out.println("\nEscolha uma opção:");
+                System.out.println("1 - Converter moedas");
+                System.out.println("0 - Sair");
+                System.out.print("Opção: ");
+                option = scanner.nextInt();
+                scanner.nextLine();
 
-            double convertedValue = convertCurrency(exchangeRateResponse, fromCurrency, toCurrency, amount);
+                if (option == 1) {
+                    System.out.print("Digite a moeda de origem (ex: USD): ");
+                    String fromCurrency = scanner.nextLine().toUpperCase();
 
-            if (convertedValue >= 0) {
-                System.out.printf("\n%.2f %s = %.2f %s%n",
-                        amount, fromCurrency, convertedValue, toCurrency);
-            } else {
-                System.out.println("Erro: uma ou ambas as moedas não estão disponíveis.");
-            }
+                    System.out.print("Digite a moeda de destino (ex: BRL): ");
+                    String toCurrency = scanner.nextLine().toUpperCase();
 
+                    System.out.print("Digite o valor a converter: ");
+                    double amount = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    double convertedValue = convertCurrency(exchangeRateResponse, fromCurrency, toCurrency, amount);
+
+                    if (convertedValue >= 0) {
+                        System.out.printf("\n%.2f %s = %.2f %s%n",
+                                amount, fromCurrency, convertedValue, toCurrency);
+                    } else {
+                        System.out.println("Erro: uma ou ambas as moedas não estão disponíveis.");
+                    }
+                }
+
+            } while (option != 0);
+
+            System.out.println("Programa encerrado.");
             scanner.close();
 
         } catch (IOException | InterruptedException e) {
