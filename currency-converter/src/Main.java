@@ -6,9 +6,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Main {
 
@@ -39,15 +39,20 @@ public class Main {
             Gson gson = new Gson();
             ExchangeRateResponse exchangeRateResponse = gson.fromJson(jsonResponse, ExchangeRateResponse.class);
 
-            List<String> selectedCurrencies = List.of("ARS", "BOB", "BRL", "CLP", "COP", "USD");
+            // Lista de moedas
+            List<String> selectedCurrencies = new ArrayList<>(List.of(
+                    "ARS", "BOB", "BRL", "CLP", "COP", "USD",
+                    "EUR", "GBP", "JPY", "CAD", "AUD", "CHF"
+            ));
 
             Scanner scanner = new Scanner(System.in);
+            List<String> conversionHistory = new ArrayList<>();
             int option;
 
             do {
                 System.out.println("\n=== Conversor de Moedas ===");
                 System.out.println("Base Currency: " + exchangeRateResponse.baseCode);
-                System.out.println("Taxas filtradas disponíveis:");
+                System.out.println("Taxas disponíveis:");
                 for (String currency : selectedCurrencies) {
                     Double rate = exchangeRateResponse.conversionRates.get(currency);
                     if (rate != null) {
@@ -57,6 +62,7 @@ public class Main {
 
                 System.out.println("\nEscolha uma opção:");
                 System.out.println("1 - Converter moedas");
+                System.out.println("2 - Ver histórico de conversões");
                 System.out.println("0 - Sair");
                 System.out.print("Opção: ");
                 option = scanner.nextInt();
@@ -78,8 +84,21 @@ public class Main {
                     if (convertedValue >= 0) {
                         System.out.printf("\n%.2f %s = %.2f %s%n",
                                 amount, fromCurrency, convertedValue, toCurrency);
+
+                        // Adição ao histórico
+                        String timestamp = LocalDateTime.now()
+                                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                        conversionHistory.add(String.format("[%s] %.2f %s -> %.2f %s",
+                                timestamp, amount, fromCurrency, convertedValue, toCurrency));
                     } else {
                         System.out.println("Erro: uma ou ambas as moedas não estão disponíveis.");
+                    }
+                } else if (option == 2) {
+                    System.out.println("\n=== Histórico de Conversões ===");
+                    if (conversionHistory.isEmpty()) {
+                        System.out.println("Nenhuma conversão realizada ainda.");
+                    } else {
+                        conversionHistory.forEach(System.out::println);
                     }
                 }
 
