@@ -75,12 +75,14 @@ public class Main {
                     case 8 -> {
                         Util.print("\n=== Histórico de Conversões ===");
                         history.printHistory();
-                        continue;
+                        break;
                     }
-                    case 0 -> continue;
+                    case 0 -> {
+                        break;
+                    }
                     default -> {
                         Util.print("Opção inválida!");
-                        continue;
+                        break;
                     }
                 }
 
