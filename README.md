@@ -5,9 +5,11 @@
 <div align="center">
 
 ![Maintenance](https://img.shields.io/maintenance/yes/2025?style=for-the-badge)
+![License MIT](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 ![Status](https://img.shields.io/badge/status-completed-brightgreen?style=for-the-badge)
 
-<img src="./readme_images/badge-one.png" height="300" alt="Badge do Oracle Next Education">
+<img src="./readme_images/badge-main-one.png" height="300" alt="Badge Principal do Oracle Next Education">
+<img src="./readme_images/badge-converter-one.png" height="300" alt="Badge conversor do Oracle Next Education">
 
 </div>
 
@@ -157,5 +159,11 @@ Contribuições são muito bem-vindas! Se você deseja contribuir com o projeto,
 - **<a href="https://www.atlassian.com/br/git/tutorials/making-a-pull-request" target="_blank">📝 Como criar um Pull Request</a>**
 
 - **<a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank">💾 Padrão de Commits Convencionais</a>**
+
+## 📜 Licença
+
+Este projeto está sob a **licença MIT**. Consulte o arquivo **[LICENSE](LICENSE)** para obter mais detalhes.
+
+> ℹ️ **Aviso de Licença:** © 2025 Alan Ryan da Silva Domingues. Este projeto está licenciado sob os termos da licença MIT. Isso significa que você pode usá-lo, copiá-lo, modificá-lo e distribuí-lo com liberdade, desde que mantenha os avisos de copyright.
 
 ⭐ Se este repositório foi útil para você, considere dar uma estrela!
