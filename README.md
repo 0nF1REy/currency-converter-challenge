@@ -42,22 +42,22 @@ Este repositório contém a implementação de um conversor de moedas (CLI) que 
 
 **1.** Entre no diretório do projeto:
 
-    ```bash
-    cd currency-converter
-    ```
+```bash
+cd currency-converter
+```
 
 **2.** Compile os arquivos Java (exemplo usando `find` para coletar fontes):
 
-    ```bash
-    mkdir -p out
-    javac -d out -cp dependencies/gson/gson-2.13.2.jar $(find src -name "*.java")
-    ```
+```bash
+mkdir -p out
+javac -d out -cp dependencies/gson/gson-2.13.2.jar $(find src -name "*.java")
+```
 
 **3.** Execute a aplicação:
 
-    ```bash
-    java -cp "out:dependencies/gson/gson-2.13.2.jar" br.com.alanryan.currency_converter.app.Main
-    ```
+```bash
+java -cp "out:dependencies/gson/gson-2.13.2.jar" br.com.alanryan.currency_converter.app.Main
+```
 
 **Observações:**
 
