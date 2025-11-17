@@ -1,5 +1,5 @@
 <h1 align="center">
-    Currency Converter
+  Conversor de Moedas
 </h1>
 
 <div align="center">
@@ -61,20 +61,13 @@ javac -d out -cp dependencies/gson/gson-2.13.2.jar $(find src -name "*.java")
 java -cp "out:dependencies/gson/gson-2.13.2.jar" br.com.alanryan.currency_converter.app.Main
 ```
 
-**Observações:**
-
-- O projeto não possui um build system (Maven/Gradle) configurado — as instruções acima usam `javac`/`java` diretamente.
-- Se preferir, crie um projeto Maven/Gradle e adicione `com.google.code.gson:gson:2.13.2` como dependência.
-
 ## 🔑 Chave de API
 
-No código atual, a chave da API está codificada em `Main.java` na variável `apiKey`:
+A chave da API está codificada em `Main.java` na variável `apiKey`:
 
 ```java
 final String apiKey = "27e0e0261fabe51366495de9";
 ```
-
-Essa chave pode ser uma chave de exemplo. Para produção ou uso próprio, substitua por sua própria chave ou refatore o código para ler a chave de uma variável de ambiente ou arquivo de configuração.
 
 ## ▶️ Exemplo de uso
 
@@ -127,38 +120,6 @@ O programa imprime o resultado e mantém o histórico apenas durante a execuçã
 </div>
 
 ---
-
-## 📫 Contribuir
-
-Contribuições são muito bem-vindas! Se você deseja contribuir com o projeto, por favor, siga estes passos:
-
-1.  **Faça um Fork** do repositório.
-
-2.  **Crie uma nova Branch** para sua feature ou correção:
-
-    ```bash
-    git checkout -b feature/nome-da-feature
-    ```
-
-3.  **Faça suas alterações** e realize o commit:
-
-    ```bash
-    git commit -m "feat: Adiciona nova feature"
-    ```
-
-4.  **Envie suas alterações** para o seu fork:
-
-    ```bash
-    git push origin feature/nome-da-feature
-    ```
-
-5.  **Abra um pull request** para a branch `main` do repositório original.
-
-## 📚 Recursos Adicionais
-
-- **<a href="https://www.atlassian.com/br/git/tutorials/making-a-pull-request" target="_blank">📝 Como criar um Pull Request</a>**
-
-- **<a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank">💾 Padrão de Commits Convencionais</a>**
 
 ## 📜 Licença
 
